@@ -1,5 +1,6 @@
 import { LinkList } from '@freeloader/link-list';
 
+
 class HashMap {
   totalBuckets = 23;
   #bucketStorage;
@@ -146,6 +147,7 @@ class HashMap {
     return allEntries;
   }
 }
+
 
 export {
   HashMap,
