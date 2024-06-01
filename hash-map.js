@@ -147,3 +147,7 @@ class HashMap {
   }
 }
 
+export {
+  HashMap,
+};
+
