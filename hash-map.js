@@ -149,6 +149,55 @@ class HashMap {
 }
 
 
+function getNextPrime(currentPrime) {
+  let currentNumber = currentPrime + 1;
+  while(true)  {
+    if(isPrime(currentNumber)) {
+      break;
+    }
+    currentNumber += 1;
+  }
+  return currentNumber;
+}
+
+
+function isPrime(num) {
+  throwErrorIfNotNum(num, 'isPrime');
+
+  if (num <= 1) {
+    return false;
+  }
+
+  for (let i = 2; i < num; i++) {
+    if ((num % i) === 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+function isPowerOf2(num) {
+  throwErrorIfNotNum(num);
+
+  let remainder = Math.log2(num) % 1;
+  if (remainder === 0) {
+    return true;
+  }
+  return false;
+}
+
+
+function throwErrorIfNotNum(num, funcName) {
+  if (typeof(num) != 'number') {
+    let errorMsg = `The argument to ${funcName} should be a number `;
+    errorMsg += `but ${num} is not a number`;
+    throw new Error(errorMsg);
+  }
+}
+
+
 export {
   HashMap,
 };
