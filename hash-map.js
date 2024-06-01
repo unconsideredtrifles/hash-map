@@ -2,7 +2,10 @@ import { LinkList } from '@freeloader/link-list';
 
 
 class HashMap {
-  totalBuckets = 23;
+  #capacity = 23;
+  #loadFactorLimit = 0.75;
+
+  #filledBuckets;
   #bucketStorage;
   #length;
 
@@ -11,11 +14,64 @@ class HashMap {
   }
 
   #initHashMap() {
-    this.#bucketStorage = Array(this.totalBuckets);
+    this.#bucketStorage = Array(this.#capacity);
     this.#length = 0;
+    this.#filledBuckets = 0;
     for (let i = 0; i < this.#bucketStorage.length; i++) {
       this.#bucketStorage[i] = new LinkList();
     }
+  }
+
+  #checkIfShouldGrow() {
+    let loadFactor = (this.#filledBuckets / this.#capacity)
+    if (loadFactor >= this.#loadFactorLimit) {
+      this.#growSize();
+    }
+  }
+
+  #growSize() {
+    let tableSize = this.#getNewTableSize();
+    this.#capacity = tableSize;
+    let oldEntries = this.entries();
+
+    this.#initHashMap();
+    for (let eachEntry of oldEntries) {
+      this.set(...eachEntry);
+    }
+  }
+
+  #getNewTableSize() {
+    let prime = this.#capacity;
+    
+    while(true) {
+      prime = getNextPrime(prime);
+      let rightChoice = true;
+      for (let i = prime - 5; i < prime; i ++) {
+        if (isPowerOf2(i)) {
+          rightChoice = false;
+        }
+      }
+      if (rightChoice === false) {
+        continue;
+      }
+      for (let i = prime + 1; i <= prime + 5; i++) {
+        if (isPowerOf2(i)) {
+          rightChoice = false;
+        }
+      }
+      if (rightChoice === true) {
+        break;
+      }
+    }
+    return prime;
+  }
+
+  get capacity() {
+    return this.#capacity;
+  }
+
+  set capacity(value) {
+    (() => {})();
   }
 
   length() {
@@ -28,7 +84,7 @@ class HashMap {
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
       let temp = (primeNumber * hashCode) + key.charCodeAt(i);
-      hashCode = (temp % this.totalBuckets);
+      hashCode = (temp % this.#capacity);
     }
 
     return hashCode;
@@ -42,6 +98,10 @@ class HashMap {
       value,
     });
     this.#length += 1;
+    if (this.#bucketStorage[idx].size === 1) {
+      this.#filledBuckets += 1;
+      this.#checkIfShouldGrow();
+    }
   }
 
   get(key) {
