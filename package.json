@@ -1,0 +1,16 @@
+{
+  "name": "hash-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hash-map.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@freeloader/link-list": "^1.0.1"
+  }
+}
