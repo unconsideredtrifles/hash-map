@@ -90,9 +90,7 @@ class HashMap {
     return hashCode;
   }
 
-  set(key, value) {
-    let idx = this.hash(key);
-
+  #addNewItem(idx, key, value) {
     this.#bucketStorage[idx].append({
       key,
       value,
@@ -102,6 +100,21 @@ class HashMap {
       this.#filledBuckets += 1;
       this.#checkIfShouldGrow();
     }
+  }
+
+  set(key, value) {
+    let idx = this.hash(key);
+    let bucket = this.#bucketStorage[idx];
+    let node;
+    let i = 0;
+    while ((node = bucket.at(i)) !== null) {
+      let item = node.value;
+      if (item.key === key) {
+        item.value = value;
+        return;
+      }
+    }
+    this.#addNewItem(idx, key, value);
   }
 
   get(key) {
