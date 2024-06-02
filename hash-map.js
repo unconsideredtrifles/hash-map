@@ -262,6 +262,50 @@ function isPowerOf2(num) {
 }
 
 
+class HashSet {
+  #hashMap;
+  constructor() {
+    this.#hashMap = new HashMap();
+  }
+
+  get capacity() {
+    return this.#hashMap.capacity;
+  }
+
+  set capacity(value) {
+    this.#hashMap.capacity = value;
+  }
+
+  length() {
+    return this.#hashMap.capacity.length;
+  }
+
+  hash(key) {
+    return this.#hashMap.hash(key);
+  }
+
+  set(key) {
+    this.#hashMap.set(key, true);
+  }
+
+  has(key) {
+    return this.#hashMap.has(key);
+  }
+
+  remove(key) {
+    this.#hashMap.remove(key);
+  }
+
+  clear() {
+    this.#hashMap.clear();
+  }
+
+  keys() {
+    return this.#hashMap.keys();
+  }
+}
+
+
 function throwErrorIfNotNum(num, funcName) {
   if (typeof(num) != 'number') {
     let errorMsg = `The argument to ${funcName} should be a number `;
@@ -273,5 +317,6 @@ function throwErrorIfNotNum(num, funcName) {
 
 export {
   HashMap,
+  HashSet,
 };
 
