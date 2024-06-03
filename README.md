@@ -25,7 +25,7 @@ h.set('Morbius 2')
 console.log(h.keys()); // ['Morbius', 'Morbius 2']
 ```
 
-## Usage
+## Installation and Usage
 1. Clone the repo from github first : 
 ```bash
 git clone https://github.com/unconsideredtrifles/hash-map
@@ -36,4 +36,13 @@ import { HashMap, HashSet } from './hash-map.js';
 
 let hm = new HashMap();
 let hs = new HashSet();
+```
+
+Or alternatively, you can install it as a npm package : 
+```bash
+npm install @freeloader/hash-map
+```
+And use it in your code :
+```JavaScript
+import { HashMap, HashSet } from '@freeloader/hash-map';
 ```
