@@ -1,5 +1,5 @@
 {
-  "name": "hash-map",
+  "name": "@freeloader/hash-map",
   "version": "1.0.0",
   "description": "",
   "main": "hash-map.js",
