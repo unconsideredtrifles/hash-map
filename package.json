@@ -1,6 +1,6 @@
 {
   "name": "@freeloader/hash-map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "hash-map.js",
   "type": "module",
